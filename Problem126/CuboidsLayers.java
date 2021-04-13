@@ -14,15 +14,16 @@ import java.util.*;
 public class CuboidsLayers {
     public static int nombreDeCubes(int longueur, int largeur, int hauteur, int numeroDeCouche){
         if (numeroDeCouche == 1) {
-            return 2 * (longueur * largeur + largeur * hauteur + longueur * hauteur);
+            return 2 * (longueur * largeur + largeur * hauteur + longueur * hauteur); // Calcul de la première couche
         }
         else {
+            // On trouve de manière récursive le nombre de cubes pour une couche avec la ligne suivante
             return nombreDeCubes(longueur, largeur, hauteur, numeroDeCouche - 1) + 4 * (longueur + largeur + hauteur) + 8 * (numeroDeCouche - 2);
         }
     }
 
     public static void main(String[] args) throws Exception {
-        HashMap<Integer, Integer> C = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> C = new HashMap<Integer, Integer>(); // On se crée notre map contenant 50000 nombres de cubes différents
         for (int i = 0; i < 50000; i++) {
             C.put(i, 0);
         }
@@ -30,13 +31,14 @@ public class CuboidsLayers {
             for (int largeur = longueur; largeur <= 5000; largeur++) {
                 for (int hauteur = largeur; hauteur <= 5000; hauteur++) {
                     for (int n = 1; nombreDeCubes(longueur, largeur, hauteur, n) < C.size(); n++) {
-                        int key = nombreDeCubes(longueur, largeur, hauteur, n);
-                        int value = C.get(key) + 1;
-                        C.put(key, value);
+                        int key = nombreDeCubes(longueur, largeur, hauteur, n); // La clé correspond au nombre de cubes
+                        int value = C.get(key) + 1; // On incrémente de 1 le nombre de cas où le nombre de cubes est égal à celui vérifié
+                        C.put(key, value); // On place le nouveau nombre de possibilités à l'emplacement du nombre de cubes trouvé
                     }
                 }
             }
         }
+        // On va maintenant chercher le premier cas où nous avons 1000 possibilités pour un nombre de cubes donné.
         for (int j = 0; j < C.size(); j++) {
             if (C.get(j) == 1000) {
                 System.out.println(j);
