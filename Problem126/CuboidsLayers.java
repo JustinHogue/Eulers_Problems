@@ -28,8 +28,8 @@ public class CuboidsLayers {
             C.put(i, 0);
         }
         for (int longueur = 1; longueur <= 5000; longueur++) {
-            for (int largeur = longueur; largeur <= 5000; largeur++) {
-                for (int hauteur = largeur; hauteur <= 5000; hauteur++) {
+            for (int largeur = 1; largeur <= longueur; largeur++) {
+                for (int hauteur = 1; hauteur <= largeur; hauteur++) {
                     for (int n = 1; nombreDeCubes(longueur, largeur, hauteur, n) < C.size(); n++) {
                         int key = nombreDeCubes(longueur, largeur, hauteur, n); // La clé correspond au nombre de cubes
                         int value = C.get(key) + 1; // On incrémente de 1 le nombre de cas où le nombre de cubes est égal à celui vérifié
