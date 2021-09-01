@@ -10,21 +10,31 @@ public class PalindromicSquareSums {
         long inversedNumber = Long.parseLong(inversedNumberString);
         return inversedNumber == number;
     }
-    public static void main(String[] args) {
-        List<Long> totalSum = new ArrayList<Long>();
-        int[] arr = IntStream.range(1, 7072).toArray();
-        for (int i = 0; i < arr.length; i++) {
-            long sum = arr[i] * arr[i];
-            for (int j = i + 1; j < arr.length; j++) {
-                sum += arr[j] * arr[j];
-                if (sum < LIMIT && isPalindromic(sum) && !totalSum.contains(sum)) {
-                    totalSum.add(sum);
-                } else if (LIMIT <= sum) {
+    public static boolean isTheSumOfConsecutiveSquares(long number) {
+        long smallestSquareAdditionner = (long) Math.sqrt(number);
+        for(int i = 1; i <= smallestSquareAdditionner; i++) {
+            long sum = (long) Math.pow(i, 2);
+            for(int j = i + 1;  j <= smallestSquareAdditionner; j++) {
+                sum += Math.pow(j, 2);
+                if (sum == number) {
+                    return true;
+                } else if (sum > number) {
                     break;
                 }
             }
         }
-        long finalSum = totalSum.stream().mapToLong(a -> a).sum();
-        System.out.println(finalSum);
+        return false;
+    }
+    public static void main(String[] args) {
+        long sum = 0;
+        for(long i = 1; i <= LIMIT; i++) {
+            if(isPalindromic(i)){
+                if(isTheSumOfConsecutiveSquares(i)){
+                    System.out.println(i);
+                    sum += i;
+                }
+            }
+        }
+        System.out.println(sum);
     }
 }
