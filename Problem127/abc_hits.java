@@ -1,52 +1,57 @@
-import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class abc_hits {
     private static int LIMIT = 120000;
-    public static HashMap<Integer, Integer> listDivisors (int number) {
-        HashMap<Integer, Integer> allDividers = new HashMap<>();
-        for(int i = 1; i <= number; i++) {
-            if (number % i == 0) {
-                allDividers.put(i, i);
-            }
-        }
-        return allDividers;
+    private static LinkedHashMap<Integer, Integer> ALL_PRIME_NUMBERS = listOfAllPrimeNumbersInGivenRange(LIMIT);
+    public static LinkedHashMap<Integer, Integer> listOfAllPrimeNumbersInGivenRange (int end) {
+        LinkedHashMap<Integer, Integer> allPrimeNumbers = new LinkedHashMap<>();
+        for (int i = 1 ; i <= end ; i++) {
+			int count = 0;
+			for (int j = 1 ; j <= i ; j++) {
+				if(i % j == 0)
+					count = count+1;
+			}
+			if(count == 2)
+				allPrimeNumbers.put(i, i);
+		}
+        return allPrimeNumbers;
     }
     public static boolean isGreatestCommonDivisorOne (int firstNumber, int secondNumber) {
-        HashMap<Integer, Integer> divisorsOfFirstNumber = listDivisors(firstNumber);
-        HashMap<Integer, Integer> divisorsOfSecondNumber = listDivisors(secondNumber);
-        Stream<Entry<Integer, Integer>> commonDivisors = divisorsOfFirstNumber.entrySet().stream().filter(e -> e.getValue().equals(divisorsOfSecondNumber.get(e.getKey())));
-        return commonDivisors.count() == 1 && divisorsOfFirstNumber.containsKey(1);
+        int gcd = 1;
+        for(int i = 1; i <= firstNumber && i <= secondNumber; i++) {
+            if (firstNumber % i == 0 && secondNumber % i == 0) {
+                gcd = i;
+            }
+        }
+        return gcd == 1;
     }
-    public static boolean isGreatestCommonDivisorOne (int firstNumber, int secondNumber, int thirdNumber) {
-        return isGreatestCommonDivisorOne(firstNumber, secondNumber) &&
-            isGreatestCommonDivisorOne(firstNumber, thirdNumber) && isGreatestCommonDivisorOne(secondNumber, thirdNumber);
-    }
-    public static Integer rad (int number) {
-        HashMap<Integer, Integer> allPrimeFactors = new HashMap<>();
-        int rad = 1;
-        for (int i = 2; i <= number; i++) {
-            while (number % i == 0) {
-                if(!allPrimeFactors.containsKey(i)){
-                    allPrimeFactors.put(i, i);
-                    rad = rad * i;
-                }
-                number /= i;
+    public static Long rad (long number) {
+        long rad = 1;
+        for(int i: ALL_PRIME_NUMBERS.keySet()) {
+            if (number % i == 0) {
+                rad *= i;
             }
         }
         return rad;
     }
     public static void main(String[] args) {
-        int sum = 0;
-        for (int a = 1; a < LIMIT/2 - 1; a++) {
-            for (int b = a + 1; a + b < LIMIT; b++) {
+        long startTime = System.nanoTime();
+        long sum = 0;
+        for (int a = 1; a < LIMIT/2; a++) {
+            int incrementB = 1;
+            if (a % 2 == 0) {
+                incrementB = 2;
+            }
+            for (int b = a + 1; a + b < LIMIT; b += incrementB) {
                 int c = a + b;
-                if(rad(a*b*c) < c && isGreatestCommonDivisorOne(a, b, c)) {
+                if(rad((long) a*b*c) < c && isGreatestCommonDivisorOne(a, c)) {
                     sum += c;
                 }
             }
-        } 
+        }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        System.out.println(duration/100000);
         System.out.println(sum);
     }
 }

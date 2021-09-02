@@ -1,6 +1,4 @@
 import java.lang.Math;
-import java.util.*;
-import java.util.stream.*;
 
 public class PalindromicSquareSums {
     private static final int LIMIT = (int) Math.pow(10, 8);
