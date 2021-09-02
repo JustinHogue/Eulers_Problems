@@ -17,17 +17,16 @@ public class abc_hits {
         return allPrimeNumbers;
     }
     public static boolean isGreatestCommonDivisorOne (int firstNumber, int secondNumber) {
-        int gcd = 1;
-        for(int i = 1; i <= firstNumber && i <= secondNumber; i++) {
+        for(int i = 2; i <= firstNumber && i <= secondNumber; i++) {
             if (firstNumber % i == 0 && secondNumber % i == 0) {
-                gcd = i;
+                return false;
             }
         }
-        return gcd == 1;
+        return true;
     }
     public static Long rad (long number) {
         long rad = 1;
-        for(int i: ALL_PRIME_NUMBERS.keySet()) {
+        for(int i: ALL_PRIME_NUMBERS.values()) {
             if (number % i == 0) {
                 rad *= i;
             }
@@ -43,7 +42,7 @@ public class abc_hits {
             }
             for (int b = a + 1; a + b < LIMIT; b += incrementB) {
                 int c = a + b;
-                if(rad((long) a*b*c) < c && isGreatestCommonDivisorOne(a, c)) {
+                if(rad((long) a*b*c) < c && isGreatestCommonDivisorOne(a,b)) {
                     sum += c;
                 }
             }
