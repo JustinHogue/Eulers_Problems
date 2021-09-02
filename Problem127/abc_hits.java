@@ -35,7 +35,6 @@ public class abc_hits {
         return rad;
     }
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
         long sum = 0;
         for (int a = 1; a < LIMIT/2; a++) {
             int incrementB = 1;
@@ -49,9 +48,6 @@ public class abc_hits {
                 }
             }
         }
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
-        System.out.println(duration/100000);
         System.out.println(sum);
     }
 }
