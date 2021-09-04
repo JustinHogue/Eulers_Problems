@@ -9,13 +9,15 @@ public class repunit extends Thread {
     }
 
     public static int A(int n) {
+        /*
         for (int i: list) {
             if (longDivisionReminder(i, n) == 0) {
                 return i;
             }
         }
         return 0;
-        //return list.stream().filter(i -> longDivisionReminder(i, n) == 0).findFirst().orElse(0);
+        */
+        return list.stream().filter(i -> longDivisionReminder(i, n) == 0).findFirst().orElse(0);
     }
 
     private static int findLengthOfInteger(int number) {
