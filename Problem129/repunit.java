@@ -65,7 +65,7 @@ public class repunit extends Thread {
             }
         }
         System.out.println("Le thread parent l'a trouvé! C'est k = " + k + " et n = " + n);
-        
+        System.exit(1);
     }
 
     public void run() {
