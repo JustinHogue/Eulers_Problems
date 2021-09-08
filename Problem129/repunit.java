@@ -1,49 +1,17 @@
-import java.util.stream.*;
+import java.math.BigInteger;
 
 public class repunit extends Thread {
-    private static final Iterable<Integer> list = IntStream.range(2, 1200000).boxed().collect(Collectors.toList());
-
-    public static String R(int k) {
-        return new String(new char[k]).replace("\0", "1");
-    }
-
-    public static int A(int n) {
-        for (int i : list) {
-            if (longDivisionReminder(i, n) == 0) {
-                return i;
-            }
+    public static int findSmallestK(int number){
+        BigInteger bigInteger = BigInteger.valueOf(11111111);
+        BigInteger numBigInteger = BigInteger.valueOf(number);
+        BigInteger remainder = BigInteger.TEN;
+        int k = 8;
+        while(remainder.compareTo(BigInteger.ZERO) != 0){
+            bigInteger = bigInteger.multiply(BigInteger.TEN).add(BigInteger.ONE);
+            remainder = bigInteger.remainder(numBigInteger);
+            k++;
         }
-        return 0;
-        }
-
-    private static int findLengthOfInteger(int number) {
-        int length = 1;
-        if (number >= 100000000) {
-            length += 8;
-            number /= 100000000;
-        }
-        if (number >= 10000) {
-            length += 4;
-            number /= 10000;
-        }
-        if (number >= 100) {
-            length += 2;
-            number /= 100;
-        }
-        if (number >= 10) {
-            length += 1;
-        }
-        return length;
-    }
-
-    public static int longDivisionReminder(int i, int divisor) {
-        int length = findLengthOfInteger(divisor);
-        int carry = (int) Math.pow(10, length) + Integer.parseInt("1".repeat(length));
-        while (length < i - 1) {
-            carry = (carry * 10 + 1) % divisor;
-            length++;
-        }
-        return carry;
+        return k;
     }
 
     public static void main(String[] args) {
@@ -57,7 +25,7 @@ public class repunit extends Thread {
                 continue;
             } else if (n % 10 == 3 || n % 10 == 7) {
                 System.out.println("This is n:" + n);
-                k = A(n);
+                k = findSmallestK(n);
             }
         }
         System.out.println("Le thread parent l'a trouvé! C'est k = " + k + " et n = " + n);
@@ -73,7 +41,7 @@ public class repunit extends Thread {
                 continue;
             } else if (n % 10 == 1 || n % 10 == 9) {
                 System.out.println("This is n:" + n);
-                k = A(n);
+                k = findSmallestK(n);
             }
         }
         System.out.println("Le thread enfant l'a trouvé! C'est k = " + k + " et n = " + n);
