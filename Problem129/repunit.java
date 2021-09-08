@@ -1,24 +1,20 @@
-import java.util.*;
 import java.util.stream.*;
 
 public class repunit extends Thread {
-    private static final List<Integer> list = IntStream.range(2, 1200000).boxed().collect(Collectors.toList());;
-    
+    private static final Iterable<Integer> list = IntStream.range(2, 1200000).boxed().collect(Collectors.toList());
+
     public static String R(int k) {
         return new String(new char[k]).replace("\0", "1");
     }
 
     public static int A(int n) {
-        /*
-        for (int i: list) {
+        for (int i : list) {
             if (longDivisionReminder(i, n) == 0) {
                 return i;
             }
         }
         return 0;
-        */
-        return list.stream().filter(i -> longDivisionReminder(i, n) == 0).findFirst().orElse(0);
-    }
+        }
 
     private static int findLengthOfInteger(int number) {
         int length = 1;
