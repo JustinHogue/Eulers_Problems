@@ -1,3 +1,16 @@
+/*
+With a matrix like this:
+   [ x1   x2   x3   x4  ]
+   [ x5   x6   x7   x8  ]
+   [ x9   x10  x11  x12 ]
+   [ x13  x14  x15  x16 ]
+The last element of each row (x4, x8, x12 & x16) will be the difference between
+the sum of the first column and the other three elements of the row.
+Therefore, we can iterate over all twelve other elements with values ranging from 0 to 9
+and increment a counter only when the four columns and the two diagonals have the same sum.
+By definition, the four rows will always be equal.
+*/
+
 public class CrissCross {
     public static int add(int n1, int n2, int n3, int n4) {
         return n1 + n2 + n3 + n4;
