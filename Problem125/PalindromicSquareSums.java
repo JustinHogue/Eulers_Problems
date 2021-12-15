@@ -23,12 +23,12 @@ public class PalindromicSquareSums {
         }
         return false;
     }
+
     public static void main(String[] args) {
         long sum = 0;
         for(long i = 1; i <= LIMIT; i++) {
             if(isPalindromic(i)){
                 if(isTheSumOfConsecutiveSquares(i)){
-                    System.out.println(i);
                     sum += i;
                 }
             }

@@ -20,6 +20,7 @@ public class CrissCross {
 
     public static void main(String[] args) {
         long startTime = System.nanoTime();
+        /*
         int sum, x5, x13, x14, x15, x16;
         int i = 0;
         for (int x1 = 0; x1 < 10; x1++) {
@@ -49,6 +50,51 @@ public class CrissCross {
                                                             && x15 < 10 && x15 >= 0
                                                             && x16 < 10 && x16 >= 0) {
                                                                 i++;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        */
+        int sum, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16;
+        int i = 0;
+        for (x1 = 0; x1 < 10; x1++) {
+            for (x2 = 0; x2 < 10; x2++) {
+                for (x3 = 0; x3 < 10; x3++) {
+                    for (x4 = 0; x4 < 10; x4++) {
+                        for (x5 = 0; x5 < 10; x5++) {
+                            for (x9 = 0; x9 < 10; x9++) {
+                                x13 = x2 + x3 + x4 - x5 - x9;
+                                sum = x1 + x2 + x3 + x4;
+                                if(x13 < 10 && x13 >= 0){
+                                    for (x6 = 0; x6 < 10; x6++) {
+                                        for (x7 = 0; x7 < 10; x7++) {
+                                            x8 = x1 + x9 + x13 - x6 - x7;
+                                            if(sum == add(x5, x6, x7, x8) && x8 < 10 && x8 >= 0){
+                                                for (x10 = 0; x10 < 10; x10++) {
+                                                    x14 = x1 + x3 + x4 - x6 - x10;
+                                                    if(sum == add(x2, x6, x10, x14) && x14 < 10 && x14 >= 0){
+                                                        for (x11 = 0; x11 < 10; x11++) {
+                                                            x12 = x1 + x5 + x13 - x10 - x11;
+                                                            x15 = x1 + x2 + x4 - x7 - x11;
+                                                            x16 = x2 + x3 + x4 - x6 - x11;
+                                                            if (sum == add(x13, x14, x15, x16)
+                                                                && sum == add(x1, x6, x11, x16)
+                                                                && sum == add(x4, x7, x10, x13)
+                                                                && x12 < 10 && x12 >= 0
+                                                                && x15 < 10 && x15 >= 0
+                                                                && x16 < 10 && x16 >= 0) {
+                                                                    //System.out.println(x13 + x14 + x15 + x16);
+                                                                    i++;
+                                                            }
                                                         }
                                                     }
                                                 }
